@@ -1,0 +1,125 @@
+@import url(reset.css);
+html {
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-wrap: break-word; }
+
+header, section {
+  width: 80%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 50px; }
+  @media (max-width: 768px) {
+    header, section {
+      width: 100%;
+      padding: 0px 20px; } }
+
+h1 {
+  font-size: 27px;
+  line-height: 37px;
+  font-weight: bold; }
+
+h2 {
+  font-size: 22px;
+  line-height: 29px;
+  font-weight: bold;
+  margin-top: 40px; }
+
+h3 {
+  font-size: 20px;
+  line-height: 27px;
+  margin-left: 10px; }
+
+h4 {
+  font-size: 18px;
+  line-height: 25px;
+  margin-left: 20px;
+  margin-top: 5px; }
+
+p {
+  font-size: 18px;
+  line-height: 25px;
+  margin-bottom: 15px;
+  margin-left: 20px; }
+
+img {
+  width: 90%;
+  display: block;
+  margin: 30px auto; }
+
+.linkButton {
+  display: block;
+  width: 120px;
+  line-height: 30px;
+  font-size: 18px;
+  color: white;
+  background-color: #FFA500;
+  margin: 20px auto;
+  text-align: center;
+  text-decoration: none;
+  font-weight: bold;
+  box-shadow: 2px 2px 2px #000;
+  transition: all 0.35s; }
+  .linkButton span {
+    font-size: 15px;
+    line-height: 15px;
+    font-weight: normal; }
+  .linkButton:hover {
+    transform: scale(1.2); }
+
+.logo {
+  width: 50%; }
+
+.example {
+  background-color: rgba(255, 165, 0, 0.7);
+  border-radius: 20px;
+  padding: 10px 30px;
+  margin-top: 20px;
+  margin-bottom: 20px; }
+
+.ccol {
+  color: #D50CE8; }
+
+.tcol {
+  color: #510DFF; }
+
+ul {
+  list-style-type: circle;
+  font-size: 18px;
+  line-height: 25px;
+  margin-left: 40px;
+  margin-bottom: 20px; }
+
+table {
+  font-size: 18px;
+  line-height: 25px;
+  padding-left: 40px;
+  margin: 0 auto;
+  border-collapse: collapse; }
+  table td, table th {
+    border: 1px solid black;
+    padding: 5px 10px; }
+  table th {
+    font-weight: bold;
+    background-color: #FFA500;
+    text-align: center; }
+
+.slider1, .slider2, .slider3 {
+  display: block;
+  width: 600px; }
+  @media (max-width: 768px) {
+    .slider1, .slider2, .slider3 {
+      width: 100%; } }
+
+#styles {
+  margin-bottom: 150px; }
+  #styles h3 {
+    width: 100%;
+    text-align: center; }
+  #styles > div {
+    margin: 0 auto 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+
+/*# sourceMappingURL=style.css.map */

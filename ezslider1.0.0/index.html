@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="ez.Slider is small JS library intended for dynamic creation sliders in easy and pleseant way">
+    <meta name="keywords" content="ezslider, documentation, java, script, js, slider, library, easy">
+    <meta name="author" content="Mateusz Gdula">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ez.Slider documentation</title>
+    <link rel="stylesheet" type="text/css" href="./css/style.css">
+
+</head>
+<body>
+	<header>
+	<img class="logo" src="./img/ezslider.svg">
+	<a class="linkButton" href="./dist/ezslider.min.js">ezSlider<br><span>v.1.0.0</span></a>
+	<h1>ez.Slider documentation</h1>
+		<p>ez.Slider is a small JavaScript library intended for dynamic creation sliders in an easy and pleasant way. It’s based on DOM and CSS3 styles in JavaScript syntax notation</p>
+	</header>
+
+	<section>
+		<h2>1. ez.Slider structure</h2>
+		<p>ez.Slider is simply a JS script that dynamically transforms a valid DOM structure into a slider. It creates interface components based on configuration passed to it. The structure of the ez.Slider is presented in the picture below:</p>
+		<img src="./img/structure.svg">
+		<h4>ez.Slider interface components:</h4>
+		<ul>
+			<li>slidesWrapper - this is an internal &ltdiv> container for slides</li>
+			<li>previous/nextSlide - this is a &ltdiv> represent previous/next slide button</li>
+			<li>previous/nextSlideRange - this is a &ltdiv> component which trigger a previous/next slide on click</li>
+			<li>markersContainer - this is a &ltdiv> container of dots slide markers</li>
+			<li>markers - this is a &ltdiv> elements which shows the currently displayed slide</li>
+		</ul>
+		<p>HTML5 DOM structure of the ez.Slider is presented below:</p>
+		<div class="example">
+			<h4>Example 1: HTML5 DOM structure of the ez.Slider</h4>
+			<p>
+				&emsp;<span class="tcol">&ltdiv</span> <span class="ccol">class="ezSlider"</span><span class="tcol">></span><br>
+					&emsp;&emsp;<span class="tcol">&ltdiv</span> <span class="ccol">class="slidesWrapper"</span><span class="tcol">></span><br>
+						&emsp;&emsp;&emsp;..slides..<br>
+					&emsp;&emsp;<span class="tcol">&lt/div></span><br>
+					&emsp;&emsp;<span class="tcol">&ltdiv</span> <span class="ccol">class="previousSlideRange"</span><span class="tcol">></span><br>
+						&emsp;&emsp;&emsp;<span class="tcol">&ltdiv</span> <span class="ccol">class="previousSlide"</span><span class="tcol">>&lt/div></span><br>
+					&emsp;&emsp;<span class="tcol">&lt/div></span><br>
+					&emsp;&emsp;<span class="tcol">&ltdiv</span> <span class="ccol">class="nextSlideRange"</span><span class="tcol">></span><br>
+						&emsp;&emsp;&emsp;<span class="tcol">&ltdiv</span> <span class="ccol">class="nextSlide"</span><span class="tcol">>&lt/div></span><br>
+					&emsp;&emsp;<span class="tcol">&lt/div></span><br>
+					&emsp;&emsp;<span class="tcol">&ltdiv</span> <span class="ccol">class="markersContainer"</span><span class="tcol">></span><br>
+						&emsp;&emsp;&emsp;..markers..<br>
+					&emsp;&emsp;<span class="tcol">&lt/div></span><br>
+				&emsp;<span class="tcol">&lt/div></span><br>
+			</p>
+		</div>
+	</section>
+
+	<section id="usage">
+		<h2>2. Use of the ez.Slider</h2>
+		<h3>2.1. Adding ez.Slider to code</h3>
+		<p>To add an ez.Slider library to your code, place the link to the library in the &ltscript> tag as an src attribute. You can also download the code and place it on your own hosting.</p>
+		<div class="example">
+			<h4>Example 2:</h4>
+			<p>
+				&emsp;<span class="tcol">&ltscript</span> <span class="ccol">src="https://mateuszgdula.github.io/ezslider1.0.0/dist/ezslider.min.js"</span><span class="tcol">>&lt/script></span><br>
+				&emsp;<span class="tcol">&ltscript</span> <span class="ccol">src="./example/dist/ezslider.min.js"</span><span class="tcol">>&lt/script></span>
+			</p>
+		</div>
+		<p>The ez.Slider can be used in two following ways depending on the need to change the slider interface.</p>
+		<h3>2.2. Use by marking valid DOM elements structure as “ezSliderTarget” class.</h3>
+
+		<h4>Valid ez.Slider target structure must meet the following requirements:</h4>
+		<ul>
+			<li>it must be built from a container (&ltdiv> tag in the Example 1) and 2 or more slides (&ltimg> tags in the Example 1);</li>
+			<li>acceptable tags for container are &ltdiv>, &ltsection>, &ltaside>, &ltarticle>, &ltheader> and &ltfooter>;</li>
+			<li>acceptable tags for slides are &ltdiv>, &ltimg>, &ltsection>, &ltaside>, &ltarticle>, &ltheader> and &ltfooter>;</li>
+		</ul>
+
+		<div class="example">
+			<h4>Example 3: exemplary valid object for ezSliderTarget class </h4>
+			<p>
+				&emsp;<span class="tcol">&ltdiv</span> <span class="ccol">class=”ezSliderTarget”</span><span class="tcol">></span><br/>
+			       	&emsp;&emsp;<span class="tcol">&ltimg ...></span><br/>
+			        &emsp;&emsp;<span class="tcol">&ltimg ...></span><br/>
+			        &emsp;&emsp;<span class="tcol">&ltimg ...></span><br/>
+			    &emsp;<span class="tcol">&lt/div></span>
+			</p>
+		</div>
+
+		<p>The interface of the slider created as ez.Slider target class method is based on CSS3 styles contained in DEFAULT_CONFIGS object and can’t be changed. Use ez.Slider by marking HTML element as ezSliderTarget rebuild internal structure of this element so it’s not needed to append it to the document.</p>
+
+		<h3>2.3. Use by ez.Slider global object.</h3>
+		<h4>Global object ezSlider accept two following arguments:</h4>
+		<ul>
+			<li>DOMObj - is valid DOM elements structure;</li>
+			<li>configs - is valid configuration object;</li>
+		</ul>
+
+		<div class="example">
+			<h4>Example 4: use of the ez.Slider by ivoking ezSlider global object</h4>
+			<p>
+				&emsp;<span class="tcol">let DOMObj</span> = <span class="ccol">document.querySelectorAll</span>(“.slide”);<br>
+			    &emsp;<span class="tcol">let configs</span> = {..};<br><br>
+
+			    &emsp;<span class="tcol">let slider</span> = <span class="ccol">ezSlider</span>(DOMObj, configs);<br> 
+
+			    &emsp;<span class="ccol">document.body.appendChild</span>(<span class="tcol">slider</span>);
+			</p>
+		</div>
+
+		<h4>Valid DOMObj structure must meet the following requirements:</h4>
+		<ul>
+			<li>it must be built from a container (&ltdiv>, &ltsection>, &ltaside>, &ltarticle>, &ltheader> or &ltfooter> are container acceptable tags) and 2 or more slides (&ltdiv>, &ltimg>, &ltsection>, &ltaside>, &ltarticle>, &ltheader> and &ltfooter> are acceptable slides tags);</li>
+			<li>or it must be a NodeList of 2 or more slides with acceptable tags;</li>
+		</ul>
+
+		<h4>Valid configuration object must meet the following requirements:</h4>
+		<ul>
+			<li>it must contain pairs of keys and values just like a standard JS object;</li>
+			<li>the keys must comply with the requirements ez.Slider validation methods;</li>
+			<li>only valid keys are allowed in ez.Slider configuration object;</li>
+			<li>valid keys and values pairs are listed in the ez.Slider configuration object section;</li>
+		</ul> 
+		<p>Use ez.Slider by invoking global object build slider from elements passed as an argument and return the DOM structure, so there is a need to append it to the document (e.g by appendChild method).</p>
+	</section>
+
+	<section id="configObj">
+	<h2>3. ez.Slider configuration object</h2>
+		<p>The ez.Slider configuration object is intended for customize slider interface CSS3 styles and slides animation options. For costumize ez.Slider options pass a configuration object to ez.Slider global object as a second argument. Acceptable keys and values of configuration object in current ez.Slider version is listed below.</p>
+		<table>
+			<thead>
+				<tr>
+					<th colspan="3">Valid keys and values of the ez.Slider configuration object</th>
+				</tr>
+				<tr>
+					<th rowspan="2">Valid keys</th>
+					<th colspan="2">Valid values</th>
+				</tr>
+				<tr>	
+					<th>Type</th>
+					<th>Description</th>
+				</tr>
+				<tr>
+					
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>sliderStyle</td>
+					<td>String </td>
+					<td>slider style name, latest ez.Slider version accepts “shift”, “fade”, and “cover” as a sliderStyle; sliderStyle value sets  the animation of the slides inside slider;</td>
+				</tr>
+				<tr>
+					<td>infiniteSliding</td>
+					<td>Boolean</td>
+					<td>infiniteSliding allows to loop slides or block them on extreme slides;</td>
+				</tr>
+				<tr>
+					<td>autoSlide</td>
+					<td>Boolean</td>
+					<td>autoSllide triggers the next slide at specified intervals;</td>
+				</tr>
+				<tr>
+					<td>autoSlideIntervals</td>
+					<td>Number</td>
+					<td>number of autoSlide intervals in seconds;</td>
+				</tr>
+				<tr>
+					<td>slideMarkers</td>
+					<td>Boolean</td>
+					<td>slideMarkers allows to turn off slide markers;</td>
+				</tr>
+				<tr>
+					<td>animationTime</td>
+					<td>String</td>
+					<td>the time of the slide animation in CSS3 notation,  e.g “1s”, “1.4s”;</td>
+				</tr>
+				<tr>
+					<td>animationFunction</td>
+					<td>String</td>
+					<td>the animation-timing-function in CSS3 notation, e.g ”ease-in”;</td>
+				</tr>
+				<tr>
+					<td>sliderContainer</td>
+					<td rowspan="14">Object</td>
+					<td rowspan="14">object contains pairs of keys and values of CSS3 styles in JavaScript syntax notation; the styles will be assigned to slider interface components; this object is not subject of validation process, so invalid CSS3 styles will generate bugs of the slider interface; keys ends with "Hover" contain styles displayed when mouse is over this element; markerActive contains styles for marker representing displayed slide;</td>
+				</tr>
+				<tr>
+					<td>slidesWrapper</td>
+				</tr>
+				<tr>
+					<td>previousSlideRange</td>
+				</tr>
+				<tr>
+					<td>previousSlideRangeHover</td>
+				</tr>
+				<tr>
+					<td>previousSlide</td>
+				</tr>
+				<tr>
+					<td>previousSlideHover</td>
+				</tr>
+				<tr>
+					<td>nextSlideRange</td>
+				</tr>
+				<tr>
+					<td>nextSlideRangeHover</td>
+				</tr>
+				<tr>
+					<td>nextSlide</td>
+				</tr>
+				<tr>
+					<td>nextSlideHover</td>
+				</tr>
+				<tr>
+					<td>markersContainer</td>
+				</tr>
+				<tr>
+					<td>markers</td>
+				</tr>
+				<tr>
+					<td>markerActive</td>
+				</tr>
+				<tr>
+					<td>markerHover</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<div class="example">
+			<h4>Example 5: exemplary valid ezSlider configuration object</h4>
+			<p>
+				&emsp;<span class="tcol">let configs</span> = {<br>
+				    &emsp;&emsp;<span class="ccol">sliderStyle</span>: “cover”,<br>
+				    &emsp;&emsp;<span class="ccol">slideMarkers</span>: false,<br>
+				    &emsp;&emsp;<span class="ccol">nextSlideStyles</span>: {<span class="ccol">display</span>: “none”},<br>
+					&emsp;&emsp;<span class="ccol">previousSlideStyles</span>: {<span class="ccol">display</span>: “none”}<br>
+				&emsp;};
+			</p>
+		</div>
+	</section>
+
+	<section id="defConfig">
+		<h2>4. Default configs of the ez.Slider.</h2>
+		<p>All of the data passed to ezSlider in configuration object are completed by default configs. If the configuration object is valid then it is mixed up with default configs. The only way to change a particular default style is to overwrite it in configuration object passed to ez,Slider (you can also change it in DEFAULT_CONFIGS.js file but it isn’t recommended). Every component of ez.Slider interface has its own default styles. The only exception is the width and height of the slider, these parameters always adapt to the slides size. The full list of default configs is listed in the table below.</p>
+		<table>
+			<thead>
+				<th colspan="2">Default values of ez.Slider configuration object</th>
+			</thead>
+			<tbody>
+				<tr>
+					<td>sliderStyle</td>
+					<td>“shift”</td>
+				</tr>
+				<tr>
+					<td>infiniteSliding</td>
+					<td>true</td>
+				</tr>
+				<tr>
+					<td>autoSlide</td>
+					<td>true</td>
+				</tr>
+				<tr>
+					<td>autoSlideIntervals</td>
+					<td>6</td>
+				</tr>
+				<tr>
+					<td>slideMarkers</td>
+					<td>true</td>
+				</tr>
+				<tr>
+					<td>animationTime</td>
+					<td>"0.5s"</td>
+				</tr>
+				<tr>
+					<td>animationFunction</td>
+					<td>"linear"</td>
+				</tr>
+				<tr>
+					<td>sliderContainer</td>
+					<td>{position: "relative"}</td>
+				</tr>
+				<tr>
+					<td>slidesWrapper</td>
+					<td>{width: "100%",<br>
+				        height: "100%",<br>
+				        position: "absolute",<br>
+				        overflow: "hidden"}
+					</td>
+				</tr>
+				<tr>
+					<td>previousSlideRange</td>
+					<td>{width: "15%",<br>
+				        height: "98%",<br>
+				        borderRadius: "20px",<br>
+				        background: "none",<br>
+				        position: "absolute",<br>
+				        left: "1%",<br>
+				        bottom: "1%",<br>
+				        display: "flex",<br>
+				        justifyContent: "center",<br>
+				        alignItems: "center",<br>
+				        transition: "0.3s linear",<br>
+				        cursor: "pointer"}
+					</td>
+				</tr>
+				<tr>
+					<td>previousSlideRangeHover</td>
+					<td>{background: "rgba(255, 255, 255, 0.2)"}</td>
+				</tr>
+				<tr>
+					<td>previousSlide</td>
+					<td>{width: "40px",<br>
+				        height: "40px",<br>
+				        borderLeft: "2px solid black",<br>
+				        borderBottom: "2px solid black",<br>
+				        transform: "rotate(45deg)"}
+					</td>
+				</tr>
+				<tr>
+					<td>previousSlideHover</td>
+					<td>{ }</td>
+				</tr>
+				<tr>
+					<td>nextSlideRange</td>
+					<td>{width: "15%",<br>
+				        height: "98%",<br>
+				        borderRadius: "20px",<br>
+				        background: "none",<br>
+				        position: "absolute",<br>
+				        right: "1%",<br>
+				        bottom: "1%",<br>
+				        display: "flex",<br>
+				        justifyContent: "center",<br>
+				        alignItems: "center",<br>
+				        transition: "0.3s linear",<br>
+				        cursor: "pointer"}
+					</td>
+				</tr>
+				<tr>
+					<td>nextSlideRangeHover</td>
+					<td>{background: "rgba(255, 255, 255, 0.2)"}</td>
+				</tr>
+				<tr>
+					<td>nextSlide</td>
+					<td>{width: "40px",<br>
+				        height: "40px",<br>
+				        borderLeft: "2px solid black",<br>
+				        borderBottom: "2px solid black",<br>
+				        transform: "rotate(-135deg)"}
+					</td>
+				</tr>
+				<tr>
+					<td>nextSlideHover</td>
+					<td>{  }</td>
+				</tr>
+				<tr>
+					<td>markersContainer</td>
+					<td>{width: "100%",<br>
+						height: "auto",<br>
+						position: "absolute",<br>
+						bottom: "3%",<br>
+						display: "flex",<br>
+						justifyContent: "center",<br>
+						transition: "all 0.5s linear"},
+				    </td>
+				</tr>
+				<tr>
+					<td>markers</td>
+					<td>{width: "10px",<br>
+				        height: "10px",<br>
+				        margin: "0 1% 0 1%",<br>
+				        borderRadius: "50%",<br>
+				        border: "1px solid black ",<br>
+				        background: "white",<br>
+				        transition: "all 0.2s linear"}
+				    </td>
+				</tr>
+				<tr>
+					<td>markerActive</td>
+					<td>{background: "orange",
+        				transform: "scale(1.4)"}
+					</td>
+				</tr>
+				<tr>
+					<td>markerHover</td>
+					<td>{background: "orange"}
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</section>
+
+	<section id="styles">
+		<h2>5. ez.Slider available styles</h2>
+		<h3>Shift style ez.Slider</h3>
+	    <div class="shift">
+	        <img src="./img/image01.jpeg" class="slider1">
+	        <img src="./img/image02.jpeg" class="slider1">
+	        <img src="./img/image03.jpeg" class="slider1">
+	    </div>
+	    <h3>Fade style ez.Slider</h3>
+	    <div class="fade">
+		    <img src="./img/image01.jpeg" class="slider2">
+		    <img src="./img/image02.jpeg" class="slider2">
+		    <img src="./img/image03.jpeg" class="slider2">
+	    </div>
+	    <h3>Cover style ez.Slider</h3>
+	    <div class="cover">
+		    <img src="./img/image01.jpeg" class="slider3">
+		    <img src="./img/image02.jpeg" class="slider3">
+		    <img src="./img/image03.jpeg" class="slider3">
+	    </div>
+	</section>
+
+<script src="https://mateuszgdula.github.io/ezslider/dist/ezslider.min.js"></script>
+<script>
+	document.querySelector(".shift").appendChild(ezSlider(document.querySelectorAll(".slider1"), {
+		sliderStyle: "shift",
+		sliderContainer: {border: "1px solid black"}
+
+	}));
+	document.querySelector(".fade").appendChild(ezSlider(document.querySelectorAll(".slider2"), {
+		sliderStyle: "fade",
+		sliderContainer: {border: "1px solid black"}
+
+	}));
+	document.querySelector(".cover").appendChild(ezSlider(document.querySelectorAll(".slider3"), {
+		sliderStyle: "cover",
+		sliderContainer: {border: "1px solid black"}
+	}));
+	
+</script>
+</body>
+</html>
